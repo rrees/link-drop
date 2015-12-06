@@ -1,17 +1,15 @@
 import falcon
-import json
 
-import renderer
-import headers
-
-class Hello:
-	def on_get(self, req, resp):
-		resp.status = falcon.HTTP_200
-
-		headers.html(resp)
-		
-		resp.body = renderer.render("index.html", {})
+import pages
+import api
 
 app = falcon.API()
 
-app.add_route('/', Hello())
+routes = [
+	('/', pages.Front()),
+	('/home', pages.Home()),
+	('/api/collection/{collection_id}', api.Collection())
+]
+
+for path, handler in routes:
+	app.add_route(path, handler)
