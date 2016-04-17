@@ -3,18 +3,20 @@
 {% block title %}Front page{% endblock %}
 
 {% block body %}
-<div class="container-fluid">
+<div class="container-fluid" ng-app="linkDropApp">
 <h1>Link Drop</h1>
 
 <div class="dashboard">
 <section class="dashboard-controls">
 <h2>Manage</h2>
-<quick-controls><quick-controls>
+<ld-quick-controls></ld-quick-controls>
 </section>
 
 <section class="collections">
 
-<latest-collections></latest-collections>
+<h2>Latest collections</h2>
+
+<ld-latest-collections></ld-latest-collections>
 
 </section>
 </div>
