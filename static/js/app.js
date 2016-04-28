@@ -5,7 +5,7 @@ const ldQuickControls = {
 }
 
 const ldLatestCollections = {
-	template: '<p>Latest Collections</p>'
+	templateUrl: '/static/components/collections/latest.html'
 }
 
 linkDropApp
