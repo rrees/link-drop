@@ -1,7 +1,7 @@
 const linkDropApp = angular.module('linkDropApp', []);
 
 const ldQuickControls = {
-	template: '<p>Controls</p>'
+	templateUrl: '/static/components/controls/quick.html'
 }
 
 const ldLatestCollections = {
