@@ -1,10 +1,21 @@
-<form>
+<form ng-if="$ctrl.showAddLink()">
 	<div class="form-group">
 		<label for="link">Link</label>
-		<input type="text" class="form-control" id="link" placeholder="URL to save">
+		<input type="text" class="form-control" id="link" name="link" placeholder="URL to save">
 	</div>	
 
 	<div class="form-group">
 		<button type="submit">Save</button>
+	</div>	
+</form>
+
+<form>
+	<div class="form-group">
+		<label for="name">Collection Name</label>
+		<input type="text" class="form-control" id="name" name="name" required placeholder="Name...">
+	</div>	
+
+	<div class="form-group">
+		<button type="submit">Create</button>
 	</div>	
 </form>
