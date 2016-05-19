@@ -1,9 +1,11 @@
 const linkDropApp = angular.module('linkDropApp', []);
 
-function QuickControlsController($scope) {
+function QuickControlsController($scope, $http, $log) {
 	var ctrl = this;
 
 	$scope.collection = [];
+
+	$http.get('/collections').then((data) => $log.debug(data))
 	
 	ctrl.showAddLink = function() {
 		return $scope.collection && $scope.collection.length > 0;
