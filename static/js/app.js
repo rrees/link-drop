@@ -10,6 +10,10 @@ function QuickControlsController($scope, $http, $log) {
 	ctrl.showAddLink = function() {
 		return $scope.collection && $scope.collection.length > 0;
 	}
+
+	ctrl.addCollection = function(collection) {
+		$log.info('Form submitted', collection);
+	}
 }
 
 const ldQuickControls = {
