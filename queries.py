@@ -1,4 +1,4 @@
 import models
 
 def all_collections(user):
-	return []
+	return models.Collection.query(models.Collection.user == user)

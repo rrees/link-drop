@@ -18,6 +18,7 @@ class Collections:
 		}
 
 		response.body = json.dumps(payload)
+	
 	def on_put(self, request, response):
 		response.status = falcon.HTTP_200
 
