@@ -1,10 +1,12 @@
 import json
+import logging
 
 import falcon
 
 from google.appengine.api import users
 
 import queries
+import repositories
 
 class Collections:
 
@@ -24,5 +26,11 @@ class Collections:
 
 		data = json.load(request.stream)
 		collection_name = data.get('name')
+
+		user = users.get_current_user()
+
+		new_collection = repositories.collections.create(user, collection_name)
+		logging.info(new_collection)
+
 		payload = {'name': collection_name}
 		response.body = json.dumps(payload)
