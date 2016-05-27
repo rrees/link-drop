@@ -12,12 +12,6 @@ class Collection(object):
 
 		resp.body = json.dumps({'collection_id': collection_id})
 
-class NewCollection(object):
-	def on_put(self, req, resp):
-		resp.status = falcon.HTTP_200
-
-		resp.body = json.dumps({'collectionId' : 'Hello world'})
-
 class Links(object):
 	def on_get(self, request, response, collection_id):
 		response.status = falcon.HTTP_200

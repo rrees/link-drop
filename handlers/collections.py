@@ -16,15 +16,19 @@ class Collections:
 		user = users.get_current_user()
 
 		payload = {
-			"collections" : [c for c in queries.all_collections(user)]
+			"collections" : [repositories.collections.to_map(c) for c in queries.all_collections(user)]
 		}
 
 		response.body = json.dumps(payload)
-	
+
+class NewCollection(object):
 	def on_put(self, request, response):
 		response.status = falcon.HTTP_200
 
+		logging.info("Create new collection")
+
 		data = json.load(request.stream)
+		logging.info(data)
 		collection_name = data.get('name')
 
 		user = users.get_current_user()
@@ -32,5 +36,5 @@ class Collections:
 		new_collection = repositories.collections.create(user, collection_name)
 		logging.info(new_collection)
 
-		payload = {'name': collection_name}
+		payload = {'name': new_collection.name}
 		response.body = json.dumps(payload)

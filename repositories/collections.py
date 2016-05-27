@@ -1,4 +1,6 @@
 import uuid
+import logging
+import json
 
 import models
 
@@ -12,4 +14,14 @@ def create(user, name, description=None):
 
 	new_collection.put()
 
+	logging.info(new_collection)
+
 	return new_collection
+
+def to_map(collection):
+	payload = {
+		"id": collection.key.urlsafe(),
+		"name": collection.name,
+	}
+
+	return payload

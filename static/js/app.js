@@ -13,6 +13,8 @@ function QuickControlsController($scope, $http, $log) {
 
 	ctrl.addCollection = function(collection) {
 		$log.info('Form submitted', collection);
+		$log.info('Collection name', collection.name);
+		$http.put('/collections/new', {name: collection.name});
 	}
 }
 

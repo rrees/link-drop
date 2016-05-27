@@ -10,7 +10,7 @@ routes = [
 	('/', pages.Front()),
 	('/home', pages.Home()),
 	('/collections', handlers.collections.Collections()),
-	('/collections/new', links.NewCollection()),
+	('/collections/new', handlers.collections.NewCollection()),
 	('/collection/{collection_id}', links.Collection()),
 	('/collection/{collection_id}/links', links.Links()),
 ]
