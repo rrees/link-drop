@@ -5,7 +5,10 @@ function QuickControlsController($scope, $http, $log) {
 
 	$scope.collection = [];
 
-	$http.get('/collections').then((data) => $log.debug(data))
+	$http.get('/collections').then((response) => {
+		$log.info(response.data);
+		$scope.collection = response.data.collections;
+	})
 	
 	ctrl.showAddLink = function() {
 		return $scope.collection && $scope.collection.length > 0;
