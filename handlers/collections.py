@@ -38,3 +38,9 @@ class NewCollection(object):
 
 		payload = {'name': new_collection.name}
 		response.body = json.dumps(payload)
+
+class RecentCollections(object):
+	def on_get(self, request, response):
+		response.status = falcon.HTTP_200
+
+		response.body = json.dumps([])

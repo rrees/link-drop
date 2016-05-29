@@ -26,8 +26,19 @@ const ldQuickControls = {
 	controller: QuickControlsController
 }
 
+function LatestCollectionsController($log, $http) {
+	var ctrl = this;
+
+	$log.info('Latest controller');
+
+	$http.get('/collections/recent').then((response) => {
+		$log.info(response);	
+	})
+}
+
 const ldLatestCollections = {
-	templateUrl: '/static/components/collections/latest.html'
+	templateUrl: '/static/components/collections/latest.html',
+	controller: LatestCollectionsController
 }
 
 linkDropApp
