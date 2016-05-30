@@ -43,4 +43,9 @@ class RecentCollections(object):
 	def on_get(self, request, response):
 		response.status = falcon.HTTP_200
 
-		response.body = json.dumps([])
+		user = users.get_current_user()
+
+		payload = {
+			"collections": [repositories.collections.to_map(c) for c in repositories.collections.latest_modified(user)]
+		}
+		response.body = json.dumps(payload)

@@ -1,6 +1,7 @@
 import uuid
 import logging
 import json
+import datetime
 
 import models
 
@@ -25,3 +26,11 @@ def to_map(collection):
 	}
 
 	return payload
+
+def all_collections(user):
+	return models.Collection.query().filter(models.Collection.user_id == user.user_id())
+
+def latest_modified(user, limit=10):
+	now = datetime.datetime.now()
+	last_updated_time = now - datetime.timedelta(days=30)
+	return models.Collection.query().filter(models.Collection.user_id == user.user_id()).filter(models.Collection.updated >= last_updated_time)
