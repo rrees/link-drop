@@ -1,1 +1,4 @@
-<p>Latest Collections</p>
+
+<ol ng-if="$ctrl.collections">
+	<li ng-repeat="collection in $ctrl.collections"><a href="/collection/{{collection.id}}">{{collection.name}}</a></li>
+</ol>

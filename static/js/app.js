@@ -27,13 +27,16 @@ const ldQuickControls = {
 }
 
 function LatestCollectionsController($log, $http) {
-	var ctrl = this;
+	const ctrl = this;
+
+	ctrl.collections = [];
 
 	$log.info('Latest controller');
 
 	$http.get('/collections/recent').then((response) => {
-		$log.info(response);	
-	})
+		$log.info(response);
+		ctrl.collections = response.data.collections;
+	});
 }
 
 const ldLatestCollections = {
