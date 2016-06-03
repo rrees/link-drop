@@ -3,6 +3,8 @@ import logging
 import json
 import datetime
 
+from google.appengine.ext import ndb
+
 import models
 
 def create(user, name, description=None):
@@ -34,3 +36,8 @@ def latest_modified(user, limit=10):
 	now = datetime.datetime.now()
 	last_updated_time = now - datetime.timedelta(days=30)
 	return models.Collection.query().filter(models.Collection.user_id == user.user_id()).filter(models.Collection.updated >= last_updated_time)
+
+def read(user, collection_id):
+	key = ndb.Key(urlsafe=collection_id)
+
+	return key.get()

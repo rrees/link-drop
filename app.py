@@ -14,6 +14,7 @@ routes = [
 	('/collections/recent', handlers.collections.RecentCollections()),
 	('/collection/{collection_id}', links.Collection()),
 	('/collection/{collection_id}/links', links.Links()),
+	('/collection/{collection_id}/view', handlers.pages.collections.View()),
 ]
 
 for path, handler in routes:

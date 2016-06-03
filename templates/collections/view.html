@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}{{collection.name}}{% endblock %}
+
+{% block body %}
+<div ng-app="linkDropApp">
+<h1>{{collection.name}}</h1>
+
+<div class="dashboard container-fluid">
+<section class="collection-display row">
+</section>
+
+</div>
+
+{% endblock %}
