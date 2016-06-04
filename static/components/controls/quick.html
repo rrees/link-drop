@@ -1,8 +1,15 @@
 <form ng-if="$ctrl.showAddLink()">
 	<div class="form-group">
 		<label for="link">Link</label>
-		<input type="text" class="form-control" id="link" name="link" placeholder="URL to save">
-	</div>	
+		<input type="text" class="form-control" id="link" name="link" placeholder="URL to save" ng-required="true">
+	</div>
+
+	<div class="form-group">
+		<label for="collection">Collection</label>
+		<select id="collection" name="collection" ng-required="true" class="form-control">
+			<option ng-repeat="collection in $ctrl.collection" value="{{collection.id}}">{{collection.name}}</option>
+		</select>
+	</div>
 
 	<div class="form-group">
 		<button type="submit">Save</button>
