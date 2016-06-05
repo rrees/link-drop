@@ -5,6 +5,9 @@ function QuickControlsController($http, $log) {
 
 	ctrl.collection = [];
 
+	ctrl.url = undefined;
+	ctrl.currentCollection = undefined;
+
 	$http.get('/collections').then((response) => {
 		$log.info(response.data);
 		ctrl.collection = response.data.collections;
@@ -18,6 +21,10 @@ function QuickControlsController($http, $log) {
 		$log.info('Form submitted', collection);
 		$log.info('Collection name', collection.name);
 		$http.put('/collections/new', {name: collection.name});
+	}
+
+	ctrl.addLink = function() {
+		$log.info('Adding a link');
 	}
 }
 

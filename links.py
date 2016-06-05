@@ -1,4 +1,5 @@
 import json
+import logging
 
 import falcon
 
@@ -17,7 +18,10 @@ class Links(object):
 		response.status = falcon.HTTP_200
 		response.body = json.dumps({'collection_id': collection_id})
 
-	def on_post(self, req, resp, collection_id):
+	def on_put(self, req, resp, collection_id):
 		resp.status = falcon.HTTP_200
+
+		data = json.loads(req.stream)
+		logging.info(data)
 
 		resp.body = json.dumps({'collection_id': collection_id})
