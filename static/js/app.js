@@ -3,15 +3,23 @@ const linkDropApp = angular.module('linkDropApp', []);
 function QuickControlsController($http, $log) {
 	var ctrl = this;
 
-	ctrl.collections = [];
+	ctrl.data = {
+		collections: []
+	};
+
+	ctrl.addLinkForm = {
+		link: undefined,
+		collection: undefined
+	}
 
 	$http.get('/collections').then((response) => {
 		$log.info(response.data);
-		ctrl.collections = response.data.collections;
+		ctrl.data.collections = response.data.collections;
+		ctrl.addLinkForm.collection = ctrl.data.collections[0];
 	})
 	
 	ctrl.showAddLink = function() {
-		return ctrl.collections && ctrl.collections.length > 0;
+		return ctrl.data.collections && ctrl.data.collections.length > 0;
 	}
 
 	ctrl.addCollection = function(collection) {
