@@ -31,6 +31,7 @@ function QuickControlsController($http, $log) {
 	ctrl.addLink = function(data) {
 		$log.info('Adding a link');
 		$log.info('Form data', data);
+		$http.put('/collection/' + data.collection.id + '/links', {link: data.link});
 	}
 }
 

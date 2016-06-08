@@ -41,3 +41,10 @@ def read(user, collection_id):
 	key = ndb.Key(urlsafe=collection_id)
 
 	return key.get()
+
+def add_link(user, collection_id, url):
+	collection = read(user, collection_id)
+	link = models.Link(url=url)
+	collection.links.append(link)
+	collection.put()
+	return collection
