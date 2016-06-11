@@ -8,6 +8,13 @@
 
 <div class="dashboard container-fluid">
 <section class="collection-display row">
+
+<ul>
+	{% for link in collection.links %}
+	<li>{{link.url}}</li>
+	{% endfor %}
+</ul>
+
 </section>
 
 </div>

@@ -12,11 +12,15 @@ function QuickControlsController($http, $log) {
 		collection: undefined
 	}
 
-	$http.get('/collections').then((response) => {
-		$log.info(response.data);
-		ctrl.data.collections = response.data.collections;
-		ctrl.addLinkForm.collection = ctrl.data.collections[0];
-	})
+	function loadCollections() {
+		$http.get('/collections').then((response) => {
+			$log.info(response.data);
+			ctrl.data.collections = response.data.collections;
+			ctrl.addLinkForm.collection = ctrl.data.collections[0];
+		});
+	}
+
+	loadCollections();
 	
 	ctrl.showAddLink = function() {
 		return ctrl.data.collections && ctrl.data.collections.length > 0;
@@ -25,7 +29,10 @@ function QuickControlsController($http, $log) {
 	ctrl.addCollection = function(collection) {
 		$log.info('Form submitted', collection);
 		$log.info('Collection name', collection.name);
-		$http.put('/collections/new', {name: collection.name});
+		$http.put('/collections/new', {name: collection.name})
+			.then((response) => loadCollections(),
+				(response) => $log.error('Collection creation failed', response));
+
 	}
 
 	ctrl.addLink = function(data) {
