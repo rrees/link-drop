@@ -11,7 +11,7 @@
 
 <ul>
 	{% for link in collection.links %}
-	<li>{{link.url}}</li>
+	<li><a href="{{link.url}}">{{link.url}}</a></li>
 	{% endfor %}
 </ul>
 
