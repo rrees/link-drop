@@ -20,6 +20,10 @@ function QuickControlsController($http, $log) {
 		});
 	}
 
+	function resetLinkForm(ctrl) {
+		ctrl.addLinkForm.link = undefined;
+	}
+
 	loadCollections();
 	
 	ctrl.showAddLink = function() {
@@ -38,7 +42,11 @@ function QuickControlsController($http, $log) {
 	ctrl.addLink = function(data) {
 		$log.info('Adding a link');
 		$log.info('Form data', data);
-		$http.put('/collection/' + data.collection.id + '/links', {link: data.link});
+		$http.put('/collection/' + data.collection.id + '/links', {link: data.link})
+			.then((response) => {
+				$log.info('Link added');
+				resetLinkForm(ctrl);
+			}, (response) => $log.error('Link addition failed', response));
 	}
 }
 
