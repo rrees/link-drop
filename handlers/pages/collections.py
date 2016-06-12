@@ -24,12 +24,11 @@ class View:
 		resp.body = renderer.render("collections/view.html", template_data)
 
 class PublicView:
-	def on_get(self, req, resp, collection_id):
-		current_user = users.get_current_user()
+	def on_get(self, req, resp, public_id):
 
-		collection = repositories.collections.read(current_user, collection_id)
+		collection = repositories.collections.read_public_collection(public_id)
 
-		if not collection.public:
+		if not collection or not collection.public:
 			headers.text(resp)
 			resp.status = falcon.HTTP_404
 			resp.body = "Unknown collection"
@@ -42,4 +41,4 @@ class PublicView:
 
 		headers.html(resp)
 		resp.status = falcon.HTTP_200
-		resp.body = renderer.render("collections/view.html", template_data)
+		resp.body = renderer.render("collections/public/view.html", template_data)

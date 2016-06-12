@@ -48,3 +48,10 @@ def add_link(user, collection_id, url):
 	collection.links.append(link)
 	collection.put()
 	return collection
+
+def read_public_collection(public_id):
+	query = models.Collection.query().filter(models.Collection.public_id == public_id)
+
+	collection = query.get()
+
+	return collection

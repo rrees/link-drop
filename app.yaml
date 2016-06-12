@@ -24,6 +24,10 @@ handlers:
   script: app.app
   secure: always
 
+-url: /links/.*
+  secure: always
+  script: app.app
+
 - url: /.*
   login: required
   secure: always
