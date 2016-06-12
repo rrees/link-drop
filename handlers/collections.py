@@ -57,6 +57,8 @@ class Public:
 
 		collection = repositories.collections.toggle_public(current_user, collection_id)
 
+		logging.info(collection.public)
+
 		response.status =falcon.HTTP_200
 		response.body = json.dumps(repositories.collections.to_map(collection))
 

@@ -73,6 +73,26 @@ const ldLatestCollections = {
 	controller: LatestCollectionsController
 }
 
+function CollectionControlsController($log, $http) {
+	const ctrl = this;
+
+	$log.info(ctrl.collectionKey);
+
+	ctrl.togglePublic = function() {
+		$http.put('/collection/' + ctrl.collectionKey + '/public')
+	}
+
+}
+
+const ldCollectionControls = {
+	templateUrl: '/static/components/collections/controls.html',
+	controller: CollectionControlsController,
+	bindings: {
+		collectionKey: '@'
+	}
+}
+
 linkDropApp
 	.component('ldQuickControls', ldQuickControls)
-	.component('ldLatestCollections', ldLatestCollections);
+	.component('ldLatestCollections', ldLatestCollections)
+	.component('ldCollectionControls', ldCollectionControls);
