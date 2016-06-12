@@ -76,10 +76,24 @@ const ldLatestCollections = {
 function CollectionControlsController($log, $http) {
 	const ctrl = this;
 
-	$log.info(ctrl.collectionKey);
+	$log.info(ctrl.initialVisibility);
+
+	const isPublic = ctrl.initialVisibility == 'True' ? true : false;
+
+	ctrl.buttonLabel = "Make public";
+
+	if(isPublic) {
+		ctrl.buttonLabel = "Make private";
+	}
+	
 
 	ctrl.togglePublic = function() {
 		$http.put('/collection/' + ctrl.collectionKey + '/public')
+			.then((response) => {
+
+			}, (response) => {
+				$log.error('Failed to toggle collection visibility', response)
+			});
 	}
 
 }
@@ -88,7 +102,8 @@ const ldCollectionControls = {
 	templateUrl: '/static/components/collections/controls.html',
 	controller: CollectionControlsController,
 	bindings: {
-		collectionKey: '@'
+		collectionKey: '@',
+		initialVisibility: '@'
 	}
 }
 
