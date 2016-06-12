@@ -55,3 +55,12 @@ def read_public_collection(public_id):
 	collection = query.get()
 
 	return collection
+
+def toggle_public(user, collection_id):
+
+	collection = read(user, collection_id)
+
+	collection.public = not collection.public
+	collection.put()
+
+	return collection

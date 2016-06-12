@@ -49,3 +49,14 @@ class RecentCollections(object):
 			"collections": [repositories.collections.to_map(c) for c in repositories.collections.latest_modified(user)]
 		}
 		response.body = json.dumps(payload)
+
+
+class Public:
+	def on_put(self, request, response, collection_id):
+		current_user = users.get_current_user()
+
+		collection = repositories.collections.toggle_public(current_user, collection_id)
+
+		response.status =falcon.HTTP_200
+		response.body = json.dumps(repositories.collections.to_map(collection))
+
