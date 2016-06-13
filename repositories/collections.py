@@ -25,6 +25,7 @@ def to_map(collection):
 	payload = {
 		"id": collection.key.urlsafe(),
 		"name": collection.name,
+		"public": collection.public,
 	}
 
 	return payload

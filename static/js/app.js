@@ -76,21 +76,20 @@ const ldLatestCollections = {
 function CollectionControlsController($log, $http) {
 	const ctrl = this;
 
-	$log.info(ctrl.initialVisibility);
-
-	const isPublic = ctrl.initialVisibility == 'True' ? true : false;
-
-	ctrl.buttonLabel = "Make public";
-
-	if(isPublic) {
-		ctrl.buttonLabel = "Make private";
+	function setLabel(flag) {
+		if(flag) {
+			return "Make private";
+		} else {
+			return "Make public";
+		}
 	}
-	
+
+	ctrl.buttonLabel = setLabel(ctrl.initialVisibility == 'True')	
 
 	ctrl.togglePublic = function() {
 		$http.put('/collection/' + ctrl.collectionKey + '/public')
 			.then((response) => {
-
+				ctrl.buttonLabel = setLabel(response.data.public);
 			}, (response) => {
 				$log.error('Failed to toggle collection visibility', response)
 			});
