@@ -24,7 +24,7 @@ handlers:
   script: app.app
   secure: always
 
--url: /links/.*
+- url: /links/.*
   secure: always
   script: app.app
 
