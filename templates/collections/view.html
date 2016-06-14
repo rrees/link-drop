@@ -8,12 +8,13 @@
 
 <div class="dashboard container-fluid">
 
-<section class="collections-controls">
-<p>Public link: <a href="/links/{{collection.public_id}}">{{collection.public_id}}</a></p>
+<section class="collection-controls">
+<p>Public link: <a href="/links/{{collection.public_id}}">/links/{{collection.public_id}}</a></p>
 <ld-collection-controls collection-key="{{collection.key.urlsafe()}}" initial-visibility="{{collection.public}}"></ld-collection-controls>
 </section>
 
 <section class="collection-display row">
+<h2>Links</h2>
 
 <ul>
 	{% for link in collection.links %}
