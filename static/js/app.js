@@ -1,6 +1,6 @@
 const linkDropApp = angular.module('linkDropApp', []);
 
-function QuickControlsController($http, $log) {
+function QuickControlsController($http, $log, $rootScope) {
 	var ctrl = this;
 
 	ctrl.data = {
@@ -46,6 +46,7 @@ function QuickControlsController($http, $log) {
 			.then((response) => {
 				$log.info('Link added');
 				resetLinkForm(ctrl);
+				$rootScope.$emit("ld:link-added");
 			}, (response) => $log.error('Link addition failed', response));
 	}
 }
@@ -55,17 +56,23 @@ const ldQuickControls = {
 	controller: QuickControlsController
 }
 
-function LatestCollectionsController($log, $http) {
+function LatestCollectionsController($log, $http, $rootScope) {
 	const ctrl = this;
 
 	ctrl.collections = [];
 
 	$log.info('Latest controller');
 
-	$http.get('/collections/recent').then((response) => {
-		$log.info(response);
-		ctrl.collections = response.data.collections;
-	});
+	function loadLatestCollections(ctrl) {
+		$http.get('/collections/recent').then((response) => {
+			$log.info(response);
+			ctrl.collections = response.data.collections;
+		});
+	}
+
+	loadLatestCollections(ctrl);
+	
+	$rootScope.$on('ld:link-added', (event) => loadLatestCollections(ctrl));
 }
 
 const ldLatestCollections = {
