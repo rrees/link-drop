@@ -36,7 +36,7 @@ def all_collections(user):
 def latest_modified(user, limit=10):
 	now = datetime.datetime.now()
 	last_updated_time = now - datetime.timedelta(days=30)
-	return models.Collection.query().filter(models.Collection.user_id == user.user_id()).filter(models.Collection.updated >= last_updated_time)
+	return models.Collection.query().filter(models.Collection.user_id == user.user_id()).filter(models.Collection.updated >= last_updated_time).order(-models.Collection.updated)
 
 def read(user, collection_id):
 	key = ndb.Key(urlsafe=collection_id)

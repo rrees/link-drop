@@ -14,3 +14,9 @@ indexes:
   properties:
   - name: user_id
   - name: updated
+
+- kind: Collection
+  properties:
+  - name: user_id
+  - name: updated
+    direction: desc
