@@ -80,7 +80,7 @@ const ldLatestCollections = {
 	controller: LatestCollectionsController
 }
 
-function CollectionControlsController($log, $http) {
+function CollectionControlsController($log, $http, $location) {
 	const ctrl = this;
 
 	function setLabel(flag) {
@@ -98,8 +98,17 @@ function CollectionControlsController($log, $http) {
 			.then((response) => {
 				ctrl.buttonLabel = setLabel(response.data.public);
 			}, (response) => {
-				$log.error('Failed to toggle collection visibility', response)
+				$log.error('Failed to toggle collection visibility', response);
 			});
+	}
+
+	ctrl.delete = function() {
+		$http.delete('/collection/' + ctrl.collectionKey)
+			.then( (response) => {
+				window.location = '/home';
+			}, (response) => {
+				$log.error('Failed to delete collection', response);
+			})
 	}
 
 }

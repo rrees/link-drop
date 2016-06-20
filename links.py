@@ -14,6 +14,16 @@ class Collection(object):
 
 		resp.body = json.dumps({'collection_id': collection_id})
 
+	def on_delete(self, request, response, collection_id):
+
+		current_user = users.get_current_user()
+
+		repositories.collections.delete(current_user, collection_id)
+
+		response.status = falcon.HTTP_200
+		response.body = json.dumps({'collection_id': collection_id})
+
+
 class Links(object):
 	def on_get(self, request, response, collection_id):
 		response.status = falcon.HTTP_200

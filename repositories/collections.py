@@ -65,3 +65,13 @@ def toggle_public(user, collection_id):
 	collection.put()
 
 	return collection
+
+def delete(user, collection_id):
+	key = ndb.Key(urlsafe=collection_id)
+
+	collection = key.get()
+
+	if collection.user_id == user.user_id():
+		collection.key.delete()
+
+	return collection
