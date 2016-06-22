@@ -7,6 +7,8 @@ function QuickControlsController($http, $log, $rootScope) {
 		collections: []
 	};
 
+	ctrl.name = undefined;
+
 	ctrl.addLinkForm = {
 		link: undefined,
 		collection: undefined
@@ -24,18 +26,25 @@ function QuickControlsController($http, $log, $rootScope) {
 		ctrl.addLinkForm.link = undefined;
 	}
 
+	function resetCollectionForm(ctrl) {
+		$log.info(ctrl);
+		ctrl.name = undefined;
+	}
+
 	loadCollections();
 	
 	ctrl.showAddLink = function() {
 		return ctrl.data.collections && ctrl.data.collections.length > 0;
 	}
 
-	ctrl.addCollection = function(collection) {
-		$log.info('Form submitted', collection);
-		$log.info('Collection name', collection.name);
-		$http.put('/collections/new', {name: collection.name})
-			.then((response) => loadCollections(),
-				(response) => $log.error('Collection creation failed', response));
+	ctrl.addCollection = function() {
+
+		$http.put('/collections/new', {name: ctrl.name})
+			.then((response) => {
+				loadCollections();
+				$rootScope.$emit('ld:collection-created');
+				resetCollectionForm(ctrl);
+			}, (response) => $log.error('Collection creation failed', response));
 
 	}
 
@@ -56,7 +65,7 @@ const ldQuickControls = {
 	controller: QuickControlsController
 }
 
-function LatestCollectionsController($log, $http, $rootScope) {
+function LatestCollectionsController($log, $http, $rootScope, $timeout) {
 	const ctrl = this;
 
 	ctrl.collections = [];
@@ -72,7 +81,15 @@ function LatestCollectionsController($log, $http, $rootScope) {
 
 	loadLatestCollections(ctrl);
 	
-	$rootScope.$on('ld:link-added', (event) => loadLatestCollections(ctrl));
+	$rootScope.$on('ld:link-added', (event) => {
+		$log.info('Latest collections updating');
+		$timeout(() => loadLatestCollections(ctrl), 500);
+	});
+
+	$rootScope.$on('ld:collection-created', (event) => {
+		$log.info('Collection created event detected');
+		$timeout(() => loadLatestCollections(ctrl), 500);
+	});
 }
 
 const ldLatestCollections = {
