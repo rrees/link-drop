@@ -7,8 +7,8 @@ import links
 app = falcon.API()
 
 routes = [
-	('/', pages.Front()),
-	('/home', pages.Home()),
+	('/', handlers.pages.general.Front()),
+	('/home', handlers.pages.general.Home()),
 	('/collections', handlers.collections.Collections()),
 	('/collections/new', handlers.collections.NewCollection()),
 	('/collections/recent', handlers.collections.RecentCollections()),
