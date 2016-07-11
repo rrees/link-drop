@@ -3,6 +3,9 @@ const linkDropApp = angular.module('linkDropApp', []);
 function QuickControlsController($http, $log, $rootScope) {
 	var ctrl = this;
 
+	const collectionsUrl = '/collections';
+	const newCollectionUrl = '/collections/new';
+
 	ctrl.data = {
 		collections: []
 	};
@@ -15,7 +18,7 @@ function QuickControlsController($http, $log, $rootScope) {
 	}
 
 	function loadCollections() {
-		$http.get('/collections').then((response) => {
+		$http.get(collectionsUrl).then((response) => {
 			$log.info(response.data);
 			ctrl.data.collections = response.data.collections;
 			ctrl.addLinkForm.collection = ctrl.data.collections[0];
@@ -39,7 +42,7 @@ function QuickControlsController($http, $log, $rootScope) {
 
 	ctrl.addCollection = function() {
 
-		$http.put('/collections/new', {name: ctrl.name})
+		$http.put(newCollectionUrl, {name: ctrl.name})
 			.then((response) => {
 				loadCollections();
 				$rootScope.$emit('ld:collection-created');
@@ -68,12 +71,13 @@ const ldQuickControls = {
 function LatestCollectionsController($log, $http, $rootScope, $timeout) {
 	const ctrl = this;
 
+	const latestCollectionsUrl = '/collections/recent';
 	ctrl.collections = [];
 
 	$log.info('Latest controller');
 
 	function loadLatestCollections(ctrl) {
-		$http.get('/collections/recent').then((response) => {
+		$http.get(latestCollectionsUrl).then((response) => {
 			$log.info(response);
 			ctrl.collections = response.data.collections;
 		});
