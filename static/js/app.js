@@ -5,6 +5,10 @@ function QuickControlsController($http, $log, $rootScope) {
 
 	const collectionsUrl = '/collections';
 	const newCollectionUrl = '/collections/new';
+	
+	function linksListResource(id) {
+		return `/collection/${id}/links`;
+	}
 
 	ctrl.data = {
 		collections: []
@@ -54,7 +58,7 @@ function QuickControlsController($http, $log, $rootScope) {
 	ctrl.addLink = function(data) {
 		$log.info('Adding a link');
 		$log.info('Form data', data);
-		$http.put('/collection/' + data.collection.id + '/links', {link: data.link})
+		$http.put(linksListResource(data.collection.id), {link: data.link})
 			.then((response) => {
 				$log.info('Link added');
 				resetLinkForm(ctrl);
@@ -104,6 +108,14 @@ const ldLatestCollections = {
 function CollectionControlsController($log, $http, $location) {
 	const ctrl = this;
 
+	function collectionPublicResource(collectionKey) {
+		return  `/collection/${collectionKey}/public`;
+	}
+
+	function collectionResource(collectionKey) {
+		return '/collection/' + collectionKey;
+	}
+
 	function setLabel(flag) {
 		if(flag) {
 			return "Make private";
@@ -115,7 +127,7 @@ function CollectionControlsController($log, $http, $location) {
 	ctrl.buttonLabel = setLabel(ctrl.initialVisibility == 'True')	
 
 	ctrl.togglePublic = function() {
-		$http.put('/collection/' + ctrl.collectionKey + '/public')
+		$http.put(collectionPublicResource(ctrl.collectionKey))
 			.then((response) => {
 				ctrl.buttonLabel = setLabel(response.data.public);
 			}, (response) => {
@@ -124,7 +136,7 @@ function CollectionControlsController($log, $http, $location) {
 	}
 
 	ctrl.delete = function() {
-		$http.delete('/collection/' + ctrl.collectionKey)
+		$http.delete(collectionResource(ctrl.collectionKey))
 			.then( (response) => {
 				window.location = '/home';
 			}, (response) => {
