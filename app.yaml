@@ -39,3 +39,6 @@ libraries:
 
 skip_files:
 - ^src$
+- ^.ve$
+- webpack.config.js
+- ^(.*/)?.*\.py[co]$
