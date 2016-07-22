@@ -1,161 +1,210 @@
-const linkDropApp = angular.module('linkDropApp', []);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
 
-function QuickControlsController($http, $log, $rootScope) {
-	var ctrl = this;
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
 
-	const collectionsUrl = '/collections';
-	const newCollectionUrl = '/collections/new';
-	
-	function linksListResource(id) {
-		return `/collection/${id}/links`;
-	}
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
 
-	ctrl.data = {
-		collections: []
-	};
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
 
-	ctrl.name = undefined;
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 
-	ctrl.addLinkForm = {
-		link: undefined,
-		collection: undefined
-	}
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
 
-	function loadCollections() {
-		$http.get(collectionsUrl).then((response) => {
-			$log.info(response.data);
-			ctrl.data.collections = response.data.collections;
-			ctrl.addLinkForm.collection = ctrl.data.collections[0];
-		});
-	}
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
 
-	function resetLinkForm(ctrl) {
-		ctrl.addLinkForm.link = undefined;
-	}
 
-	function resetCollectionForm(ctrl) {
-		$log.info(ctrl);
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports) {
+
+	const linkDropApp = angular.module('linkDropApp', []);
+
+	function QuickControlsController($http, $log, $rootScope) {
+		var ctrl = this;
+
+		const collectionsUrl = '/collections';
+		const newCollectionUrl = '/collections/new';
+		
+		function linksListResource(id) {
+			return `/collection/${id}/links`;
+		}
+
+		ctrl.data = {
+			collections: []
+		};
+
 		ctrl.name = undefined;
-	}
 
-	loadCollections();
-	
-	ctrl.showAddLink = function() {
-		return ctrl.data.collections && ctrl.data.collections.length > 0;
-	}
+		ctrl.addLinkForm = {
+			link: undefined,
+			collection: undefined
+		}
 
-	ctrl.addCollection = function() {
+		function loadCollections() {
+			$http.get(collectionsUrl).then((response) => {
+				$log.info(response.data);
+				ctrl.data.collections = response.data.collections;
+				ctrl.addLinkForm.collection = ctrl.data.collections[0];
+			});
+		}
 
-		$http.put(newCollectionUrl, {name: ctrl.name})
-			.then((response) => {
-				loadCollections();
-				$rootScope.$emit('ld:collection-created');
-				resetCollectionForm(ctrl);
-			}, (response) => $log.error('Collection creation failed', response));
+		function resetLinkForm(ctrl) {
+			ctrl.addLinkForm.link = undefined;
+		}
 
-	}
+		function resetCollectionForm(ctrl) {
+			$log.info(ctrl);
+			ctrl.name = undefined;
+		}
 
-	ctrl.addLink = function(data) {
-		$log.info('Adding a link');
-		$log.info('Form data', data);
-		$http.put(linksListResource(data.collection.id), {link: data.link})
-			.then((response) => {
-				$log.info('Link added');
-				resetLinkForm(ctrl);
-				$rootScope.$emit("ld:link-added");
-			}, (response) => $log.error('Link addition failed', response));
-	}
-}
+		loadCollections();
+		
+		ctrl.showAddLink = function() {
+			return ctrl.data.collections && ctrl.data.collections.length > 0;
+		}
 
-const ldQuickControls = {
-	templateUrl: '/static/components/controls/quick.html',
-	controller: QuickControlsController
-}
+		ctrl.addCollection = function() {
 
-function LatestCollectionsController($log, $http, $rootScope, $timeout) {
-	const ctrl = this;
+			$http.put(newCollectionUrl, {name: ctrl.name})
+				.then((response) => {
+					loadCollections();
+					$rootScope.$emit('ld:collection-created');
+					resetCollectionForm(ctrl);
+				}, (response) => $log.error('Collection creation failed', response));
 
-	const latestCollectionsUrl = '/collections/recent';
-	ctrl.collections = [];
+		}
 
-	$log.info('Latest controller');
-
-	function loadLatestCollections(ctrl) {
-		$http.get(latestCollectionsUrl).then((response) => {
-			$log.info(response);
-			ctrl.collections = response.data.collections;
-		});
-	}
-
-	loadLatestCollections(ctrl);
-	
-	$rootScope.$on('ld:link-added', (event) => {
-		$log.info('Latest collections updating');
-		$timeout(() => loadLatestCollections(ctrl), 500);
-	});
-
-	$rootScope.$on('ld:collection-created', (event) => {
-		$log.info('Collection created event detected');
-		$timeout(() => loadLatestCollections(ctrl), 500);
-	});
-}
-
-const ldLatestCollections = {
-	templateUrl: '/static/components/collections/latest.html',
-	controller: LatestCollectionsController
-}
-
-function CollectionControlsController($log, $http, $location) {
-	const ctrl = this;
-
-	function collectionPublicResource(collectionKey) {
-		return  `/collection/${collectionKey}/public`;
-	}
-
-	function collectionResource(collectionKey) {
-		return '/collection/' + collectionKey;
-	}
-
-	function setLabel(flag) {
-		if(flag) {
-			return "Make private";
-		} else {
-			return "Make public";
+		ctrl.addLink = function(data) {
+			$log.info('Adding a link');
+			$log.info('Form data', data);
+			$http.put(linksListResource(data.collection.id), {link: data.link})
+				.then((response) => {
+					$log.info('Link added');
+					resetLinkForm(ctrl);
+					$rootScope.$emit("ld:link-added");
+				}, (response) => $log.error('Link addition failed', response));
 		}
 	}
 
-	ctrl.buttonLabel = setLabel(ctrl.initialVisibility == 'True')	
+	const ldQuickControls = {
+		templateUrl: '/static/components/controls/quick.html',
+		controller: QuickControlsController
+	}
 
-	ctrl.togglePublic = function() {
-		$http.put(collectionPublicResource(ctrl.collectionKey))
-			.then((response) => {
-				ctrl.buttonLabel = setLabel(response.data.public);
-			}, (response) => {
-				$log.error('Failed to toggle collection visibility', response);
+	function LatestCollectionsController($log, $http, $rootScope, $timeout) {
+		const ctrl = this;
+
+		const latestCollectionsUrl = '/collections/recent';
+		ctrl.collections = [];
+
+		$log.info('Latest controller');
+
+		function loadLatestCollections(ctrl) {
+			$http.get(latestCollectionsUrl).then((response) => {
+				$log.info(response);
+				ctrl.collections = response.data.collections;
 			});
+		}
+
+		loadLatestCollections(ctrl);
+		
+		$rootScope.$on('ld:link-added', (event) => {
+			$log.info('Latest collections updating');
+			$timeout(() => loadLatestCollections(ctrl), 500);
+		});
+
+		$rootScope.$on('ld:collection-created', (event) => {
+			$log.info('Collection created event detected');
+			$timeout(() => loadLatestCollections(ctrl), 500);
+		});
 	}
 
-	ctrl.delete = function() {
-		$http.delete(collectionResource(ctrl.collectionKey))
-			.then( (response) => {
-				window.location = '/home';
-			}, (response) => {
-				$log.error('Failed to delete collection', response);
-			})
+	const ldLatestCollections = {
+		templateUrl: '/static/components/collections/latest.html',
+		controller: LatestCollectionsController
 	}
 
-}
+	function CollectionControlsController($log, $http, $location) {
+		const ctrl = this;
 
-const ldCollectionControls = {
-	templateUrl: '/static/components/collections/controls.html',
-	controller: CollectionControlsController,
-	bindings: {
-		collectionKey: '@',
-		initialVisibility: '@'
+		function collectionPublicResource(collectionKey) {
+			return  `/collection/${collectionKey}/public`;
+		}
+
+		function collectionResource(collectionKey) {
+			return '/collection/' + collectionKey;
+		}
+
+		function setLabel(flag) {
+			if(flag) {
+				return "Make private";
+			} else {
+				return "Make public";
+			}
+		}
+
+		ctrl.buttonLabel = setLabel(ctrl.initialVisibility == 'True')	
+
+		ctrl.togglePublic = function() {
+			$http.put(collectionPublicResource(ctrl.collectionKey))
+				.then((response) => {
+					ctrl.buttonLabel = setLabel(response.data.public);
+				}, (response) => {
+					$log.error('Failed to toggle collection visibility', response);
+				});
+		}
+
+		ctrl.delete = function() {
+			$http.delete(collectionResource(ctrl.collectionKey))
+				.then( (response) => {
+					window.location = '/home';
+				}, (response) => {
+					$log.error('Failed to delete collection', response);
+				})
+		}
+
 	}
-}
 
-linkDropApp
-	.component('ldQuickControls', ldQuickControls)
-	.component('ldLatestCollections', ldLatestCollections)
-	.component('ldCollectionControls', ldCollectionControls);
+	const ldCollectionControls = {
+		templateUrl: '/static/components/collections/controls.html',
+		controller: CollectionControlsController,
+		bindings: {
+			collectionKey: '@',
+			initialVisibility: '@'
+		}
+	}
+
+	linkDropApp
+		.component('ldQuickControls', ldQuickControls)
+		.component('ldLatestCollections', ldLatestCollections)
+		.component('ldCollectionControls', ldCollectionControls);
+
+/***/ }
+/******/ ]);
