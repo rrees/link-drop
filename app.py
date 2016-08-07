@@ -1,6 +1,5 @@
 import falcon
 
-import pages
 import handlers
 import links
 
