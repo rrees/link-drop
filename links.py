@@ -5,7 +5,6 @@ import falcon
 
 from google.appengine.api import users
 
-import queries
 import repositories
 
 class Collection(object):

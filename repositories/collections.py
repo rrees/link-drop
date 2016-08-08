@@ -30,8 +30,13 @@ def to_map(collection):
 
 	return payload
 
-def all_collections(user):
-	return models.Collection.query().filter(models.Collection.user_id == user.user_id())
+def all_collections(user, sort=False):
+	query = models.Collection.query().filter(models.Collection.user_id == user.user_id())
+
+	if sort:
+		query.order(models.Collection.name)
+
+	return query
 
 def latest_modified(user, limit=10):
 	now = datetime.datetime.now()

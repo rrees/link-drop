@@ -5,7 +5,6 @@ import falcon
 
 from google.appengine.api import users
 
-import queries
 import repositories
 
 class Collections:
@@ -16,7 +15,7 @@ class Collections:
 		user = users.get_current_user()
 
 		payload = {
-			"collections" : [repositories.collections.to_map(c) for c in queries.all_collections(user)]
+			"collections" : [repositories.collections.to_map(c) for c in repositories.collections.all_collections(user, sort=True)]
 		}
 
 		response.body = json.dumps(payload)
@@ -24,8 +23,6 @@ class Collections:
 class NewCollection(object):
 	def on_put(self, request, response):
 		response.status = falcon.HTTP_200
-
-		logging.info("Create new collection")
 
 		data = json.load(request.stream)
 		logging.info(data)
