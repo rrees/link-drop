@@ -14,8 +14,10 @@ class Collections:
 
 		user = users.get_current_user()
 
+		collections = [repositories.collections.to_map(c) for c in repositories.collections.all_collections(user, sort=True)]
+
 		payload = {
-			"collections" : [repositories.collections.to_map(c) for c in repositories.collections.all_collections(user, sort=True)]
+			"collections" : collections,
 		}
 
 		response.body = json.dumps(payload)

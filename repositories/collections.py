@@ -31,12 +31,10 @@ def to_map(collection):
 	return payload
 
 def all_collections(user, sort=False):
-	query = models.Collection.query().filter(models.Collection.user_id == user.user_id())
-
 	if sort:
-		query.order(models.Collection.name)
+		return models.Collection.query().filter(models.Collection.user_id == user.user_id()).order(models.Collection.name)
 
-	return query
+	return models.Collection.query().filter(models.Collection.user_id == user.user_id())
 
 def latest_modified(user, limit=10):
 	now = datetime.datetime.now()

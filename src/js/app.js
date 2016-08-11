@@ -3,8 +3,8 @@ const linkDropApp = angular.module('linkDropApp', []);
 function QuickControlsController($http, $log, $rootScope) {
 	var ctrl = this;
 
-	const collectionsUrl = '/collections';
-	const newCollectionUrl = '/collections/new';
+	const collectionsUrl = '/api/collections';
+	const newCollectionUrl = '/api/collections/new';
 	
 	function linksListResource(id) {
 		return `/collection/${id}/links`;
@@ -75,7 +75,7 @@ const ldQuickControls = {
 function LatestCollectionsController($log, $http, $rootScope, $timeout) {
 	const ctrl = this;
 
-	const latestCollectionsUrl = '/collections/recent';
+	const latestCollectionsUrl = '/api/collections/recent';
 	ctrl.collections = [];
 
 	$log.info('Latest controller');

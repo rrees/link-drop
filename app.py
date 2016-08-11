@@ -7,9 +7,9 @@ app = falcon.API()
 routes = [
 	('/', handlers.pages.general.Front()),
 	('/home', handlers.pages.general.Home()),
-	('/collections', handlers.collections.Collections()),
-	('/collections/new', handlers.collections.NewCollection()),
-	('/collections/recent', handlers.collections.RecentCollections()),
+	('/api/collections', handlers.collections.Collections()),
+	('/api/collections/new', handlers.collections.NewCollection()),
+	('/api/collections/recent', handlers.collections.RecentCollections()),
 	('/collection/{collection_id}', handlers.links.Collection()),
 	('/collection/{collection_id}/links', handlers.links.Links()),
 	('/collection/{collection_id}/view', handlers.pages.collections.View()),
