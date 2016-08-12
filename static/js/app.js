@@ -42,7 +42,7 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	const linkDropApp = angular.module('linkDropApp', []);
 
@@ -151,6 +151,18 @@
 		controller: LatestCollectionsController
 	}
 
+	const ldCollectionControls = __webpack_require__(1);
+
+	linkDropApp
+		.component('ldQuickControls', ldQuickControls)
+		.component('ldLatestCollections', ldLatestCollections)
+		.component('ldCollectionControls', ldCollectionControls);
+
+/***/ },
+/* 1 */
+/***/ function(module, exports) {
+
+	
 	function CollectionControlsController($log, $http, $location) {
 		const ctrl = this;
 
@@ -201,10 +213,7 @@
 		}
 	}
 
-	linkDropApp
-		.component('ldQuickControls', ldQuickControls)
-		.component('ldLatestCollections', ldLatestCollections)
-		.component('ldCollectionControls', ldCollectionControls);
+	module.exports = ldCollectionControls;
 
 /***/ }
 /******/ ]);
