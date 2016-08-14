@@ -60,4 +60,3 @@ class Public:
 
 		response.status =falcon.HTTP_200
 		response.body = json.dumps(repositories.collections.to_map(collection))
-

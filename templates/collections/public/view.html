@@ -6,6 +6,11 @@
 
 <h1 class="collection-name">{{collection.name}}</h1>
 
+{% if not collection.links %}
+<p>This collection does not currently have any links.</p>
+{% endif %}
+
+{% if collection.links %}
 <section class="collection-display">
 
 <ul class="collection-links">
@@ -15,5 +20,7 @@
 </ul>
 
 </section>
+
+{% endif %}
 
 {% endblock %}
