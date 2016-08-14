@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Your collections{% endblock %}
+
+{% block body %}
+<div ng-app="linkDropApp">
+	{% if collections %}
+	<ul>
+		{% for collection in collections %}
+		<li><a href="/collection/{{collection.id}}/view">{{collection.name}}</a></li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+</div>
+{% endblock %}
