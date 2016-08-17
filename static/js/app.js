@@ -49,11 +49,13 @@
 	const ldCollectionControls = __webpack_require__(1);
 	const ldLatestCollections = __webpack_require__(2);
 	const ldQuickControls = __webpack_require__(3);
+	const ldQuickAdd = __webpack_require__(4);
 
 	linkDropApp
 		.component('ldQuickControls', ldQuickControls)
 		.component('ldLatestCollections', ldLatestCollections)
-		.component('ldCollectionControls', ldCollectionControls);
+		.component('ldCollectionControls', ldCollectionControls)
+		.component('ldQuickAdd', ldQuickAdd);
 
 /***/ },
 /* 1 */
@@ -229,6 +231,26 @@
 
 
 	module.exports = ldQuickControls;
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	function QuickAddController($http, $log, $rootScope) {
+		var ctrl = this;
+
+		$log.debug('Hello from quick add');
+	};
+
+	const ldQuickAdd = {
+		controller: QuickAddController,
+		templateUrl: '/static/components/controls/quick-add.html',
+		bindings: {
+			collectionKey: '@'
+		}
+	}
+
+	module.exports = ldQuickAdd;
 
 /***/ }
 /******/ ]);
