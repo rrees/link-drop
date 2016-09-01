@@ -1,12 +1,11 @@
 <div class="collection-quick-add-link">
-	<p>Add link</p>
 	<form class="form-inline">
 		<div class="form-group">
 			<label for="url">Url</label>
-			<input id="url" name="url" type="text" class="form-control" ng-model="$ctrl.url">
+			<input id="url" name="url" type="text" class="form-control" ng-model="$ctrl.url" required>
 		</div>
 		<div class="form-group">
-			<button class="btn" type="submit" ng-click="$ctrl.addLink($ctrl.url)">Add</button>
+			<button class="btn" type="submit" ng-click="$ctrl.addLink($ctrl.url)">Add link</button>
 		</div>
 	</form>
 </div>
