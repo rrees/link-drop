@@ -239,11 +239,18 @@
 	function QuickAddController($http, $log, $rootScope) {
 		var ctrl = this;
 
-		$log.debug('Hello from quick add');
+		const collectionLinksResource = `/collection/${ctrl.collectionKey}/links`;
+
+		$log.debug(collectionLinksResource);
 
 		ctrl.addLink = function(url) {
-			console.log(url);
-			console.log(ctrl.collectionKey);
+			$http.put(collectionLinksResource, {link: url})
+				.then((response) => {
+					$log.debug('Link saved successfully');
+					ctrl.url = undefined;
+				}, (response) => {
+					$log.error('Failed to save the link');
+				});
 		}
 	};
 
