@@ -243,10 +243,15 @@
 
 		$log.debug(collectionLinksResource);
 
+		const domParser = new DOMParser();
+
 		function reloadLinks() {
 			$http.get(`/collection/${ctrl.collectionKey}/view`)
 				.then((response) => {
-					$log.debug(response.data);
+					const parsedHtml = domParser.parseFromString(response.data, 'text/html');
+					const linksElement = parsedHtml.querySelector('#links-list');
+					$log.debug(linksElement);
+					angular.element('#links-list').replaceWith(linksElement);
 				}, (response) => {
 					$log.error('Failed to re-read page');
 				})
