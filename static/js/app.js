@@ -243,11 +243,21 @@
 
 		$log.debug(collectionLinksResource);
 
+		function reloadLinks() {
+			$http.get(`/collection/${ctrl.collectionKey}/view`)
+				.then((response) => {
+					$log.debug(response.data);
+				}, (response) => {
+					$log.error('Failed to re-read page');
+				})
+		}
+
 		ctrl.addLink = function(url) {
 			$http.put(collectionLinksResource, {link: url})
 				.then((response) => {
 					$log.debug('Link saved successfully');
 					ctrl.url = undefined;
+					reloadLinks();
 				}, (response) => {
 					$log.error('Failed to save the link');
 				});
