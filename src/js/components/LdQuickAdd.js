@@ -3,8 +3,6 @@ function QuickAddController($http, $log, $rootScope) {
 
 	const collectionLinksResource = `/collection/${ctrl.collectionKey}/links`;
 
-	$log.debug(collectionLinksResource);
-
 	const domParser = new DOMParser();
 
 	function reloadLinks() {
@@ -12,7 +10,7 @@ function QuickAddController($http, $log, $rootScope) {
 			.then((response) => {
 				const parsedHtml = domParser.parseFromString(response.data, 'text/html');
 				const linksElement = parsedHtml.querySelector('#links-list');
-				$log.debug(linksElement);
+
 				angular.element('#links-list').replaceWith(linksElement);
 			}, (response) => {
 				$log.error('Failed to re-read page');

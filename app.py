@@ -14,6 +14,7 @@ routes = [
 	('/collection/{collection_id}/links', handlers.links.Links()),
 	('/collection/{collection_id}/view', handlers.pages.collections.View()),
 	('/collection/{collection_id}/public', handlers.collections.Public()),
+	('/collection/{collection_id}/links/{link_hash}', handlers.pages.links.View()),
 	('/links/{public_id}', handlers.pages.collections.PublicView()),
 	('/collections', handlers.pages.collections.All()),
 ]
