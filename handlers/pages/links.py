@@ -9,6 +9,9 @@ import repositories
 
 class View:
 	def on_get(self, request, response, collection_id, link_index):
+
+		link_idx = int(link_index)
+
 		response.status = falcon.HTTP_200
 
 		headers.html(response)
@@ -16,11 +19,12 @@ class View:
 		current_user = users.get_current_user()
 
 		collection = repositories.collections.read(current_user, collection_id)
-		link = collection.links[int(link_index)]
+		link = collection.links[link_idx]
 
 		template_data = {
 			'collection': collection,
 			'link': link,
+			'link_index': link_idx,
 		}
 		
 		response.body = renderer.render("collections/links/view.html", template_data)

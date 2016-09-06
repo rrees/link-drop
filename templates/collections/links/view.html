@@ -6,4 +6,10 @@
 
 <p>Return to <a href="/collection/{{collection.key.urlsafe()}}/view">{{collection.name}}</a></p>
 
+<p>Link url: <a href="{{link.url}}">{{link.url}}</a></p>
+
+<form>
+	<input type="hidden" name="link_index" value="{{link_index}}">
+</form>
+
 {% endblock %}
