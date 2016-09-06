@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit link{% endblock %}
+
+{% block body %}
+
+<p>Return to <a href="/collection/{{collection.key.urlsafe()}}/view">{{collection.name}}</a></p>
+
+{% endblock %}
