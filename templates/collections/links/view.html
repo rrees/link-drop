@@ -8,8 +8,12 @@
 
 <p>Link url: <a href="{{link.url}}">{{link.url}}</a></p>
 
-<form>
+<form method="POST" action="/collection/{{collection.key.urlsafe()}}/link/{{link_index}}/form/delete">
 	<input type="hidden" name="link_index" value="{{link_index}}">
+
+	<div class="form-group">
+		<button type="submit" class="btn">Delete</button>
+	</div>
 </form>
 
 {% endblock %}
