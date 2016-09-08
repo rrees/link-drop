@@ -28,3 +28,7 @@ class View:
 		}
 		
 		response.body = renderer.render("collections/links/view.html", template_data)
+
+class DeleteForm:
+	def on_post(self, request, response, collection_id, link_index):
+		pass
