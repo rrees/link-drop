@@ -31,4 +31,4 @@ class View:
 
 class DeleteForm:
 	def on_post(self, request, response, collection_id, link_index):
-		pass
+		raise falcon.HTTPFound('/collection/{0}/view'.format(collection_id))

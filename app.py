@@ -15,6 +15,7 @@ routes = [
 	('/collection/{collection_id}/view', handlers.pages.collections.View()),
 	('/collection/{collection_id}/public', handlers.collections.Public()),
 	('/collection/{collection_id}/link/{link_index}', handlers.pages.links.View()),
+	('/collection/{collection_id}/link/{link_index}/form/delete', handlers.pages.links.DeleteForm()),
 	('/links/{public_id}', handlers.pages.collections.PublicView()),
 	('/collections', handlers.pages.collections.All()),
 ]
