@@ -31,4 +31,7 @@ class View:
 
 class DeleteForm:
 	def on_post(self, request, response, collection_id, link_index):
+		current_user = users.get_current_user()
+		link_idx = int(link_index)
+		repositories.links.remove_link(current_user, collection_id, link_idx)
 		raise falcon.HTTPFound('/collection/{0}/view'.format(collection_id))
