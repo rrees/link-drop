@@ -4,6 +4,7 @@ class Link(ndb.Model):
 	url = ndb.StringProperty(required=True)
 	created = ndb.DateTimeProperty(auto_now_add=True)
 	updated = ndb.DateTimeProperty(auto_now=True)
+	name = ndb.StringProperty()
 
 class Collection(ndb.Model):
 	user_id = ndb.StringProperty(required=True)
