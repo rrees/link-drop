@@ -49,12 +49,6 @@ class EditForm:
 
 		logging.info(form_data)
 
-		collection = repositories.collections.read(current_user, collection_id)
-		link = collection.links[link_idx]
-
-		if 'name' in form_data and form_data['name']:
-			link.name = form_data['name']
-
-		collection.put()
+		repositories.links.update(current_user, collection_id, link_idx, form_data)
 
 		raise falcon.HTTPFound('/collection/{0}/link/{1}'.format(collection_id, link_index))
