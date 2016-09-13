@@ -47,8 +47,6 @@ class EditForm:
 
 		form_data = forms.edit_link(request.params)
 
-		logging.info(form_data)
-
 		repositories.links.update(current_user, collection_id, link_idx, form_data)
 
 		raise falcon.HTTPFound('/collection/{0}/link/{1}'.format(collection_id, link_index))

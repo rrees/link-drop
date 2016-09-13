@@ -12,6 +12,11 @@
 	<input type="hidden" name="link_index" value="{{link_index}}">
 
 	<div class="form-group">
+		<label for="name">Name</label>
+		<input id="name" name="name" type="text" {% if link.name %}value="{{link.name}}"{% endif %}>
+	</div>
+
+	<div class="form-group">
 		<button type="submit" class="btn">Save changes</button>
 	</div>
 </form>

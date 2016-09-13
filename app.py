@@ -4,6 +4,8 @@ import handlers
 
 app = falcon.API()
 
+app.req_options.auto_parse_form_urlencoded = True
+
 routes = [
 	('/', handlers.pages.general.Front()),
 	('/home', handlers.pages.general.Home()),

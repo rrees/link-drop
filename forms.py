@@ -1,3 +1,4 @@
+import logging
 
 def edit_link(params):
 	return {
