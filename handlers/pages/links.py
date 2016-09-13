@@ -6,6 +6,7 @@ import renderer
 import headers
 
 import repositories
+import forms
 
 class View:
 	def on_get(self, request, response, collection_id, link_index):
@@ -35,3 +36,9 @@ class DeleteForm:
 		link_idx = int(link_index)
 		repositories.links.remove_link(current_user, collection_id, link_idx)
 		raise falcon.HTTPFound('/collection/{0}/view'.format(collection_id))
+
+class EditForm:
+	def on_post(self, request, response, collection_id, link_index):
+		link_idx = int(link_index)
+
+		raise falcon.HTTPFound('/collection/{0}/link/{1}'.format(collection_id, link_index))
