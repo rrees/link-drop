@@ -1,3 +1,5 @@
+import logging
+
 import falcon
 
 from google.appengine.api import users
@@ -40,5 +42,19 @@ class DeleteForm:
 class EditForm:
 	def on_post(self, request, response, collection_id, link_index):
 		link_idx = int(link_index)
+
+		current_user = users.get_current_user()
+
+		form_data = forms.edit_link(request.params)
+
+		logging.info(form_data)
+
+		collection = repositories.collections.read(current_user, collection_id)
+		link = collection.links[link_idx]
+
+		if 'name' in form_data and form_data['name']:
+			link.name = form_data['name']
+
+		collection.put()
 
 		raise falcon.HTTPFound('/collection/{0}/link/{1}'.format(collection_id, link_index))

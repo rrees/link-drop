@@ -1,2 +1,1 @@
 falcon==1.0.0
-WTForms==2.1

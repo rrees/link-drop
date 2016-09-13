@@ -1,4 +1,5 @@
-import wtforms
 
-class EditLink(wtforms.Form):
-	name = wtforms.StringField('Name', [])
+def edit_link(params):
+	return {
+		'name': params.get('name', None)
+	}
