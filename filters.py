@@ -1,6 +1,6 @@
 
 def name_or_url(link):
-	if hasattr(link, 'name'):
+	if hasattr(link, 'name') and link.name:
 		return link.name
 
 	return link.url
