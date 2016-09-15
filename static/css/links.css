@@ -1,0 +1,23 @@
+.links-list {
+	max-width: 75vw;
+}
+
+.links-list--link-details {
+	display: flex;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+}
+
+.links-list--link-details:hover {
+	background-color: #ccc;
+}
+
+.links-list--link-details--link {
+	flex-grow: 2;
+	max-width: 50rem;
+	padding-right: 2rem;
+}
+
+.links-list--link-details--edit {
+	flex-grow: 1;
+}
