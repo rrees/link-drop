@@ -20,7 +20,7 @@
 
 <ul id="links-list">
 	{% for link in collection.links %}
-	<li><a href="{{link.url}}">{{link.url}}</a> <a href="/collection/{{collection.key.urlsafe()}}/link/{{loop.index0}}">Edit</a></li>
+	<li><a href="{{link.url}}">{{link | name_or_url }}</a> <a href="/collection/{{collection.key.urlsafe()}}/link/{{loop.index0}}">Edit</a></li>
 	{% endfor %}
 </ul>
 

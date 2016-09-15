@@ -15,7 +15,7 @@
 
 <ul class="collection-links">
 	{% for link in collection.links %}
-	<li class="collection-link"><a class="collection-link__link" href="{{link.url}}">{{link.url}}</a></li>
+	<li class="collection-link"><a class="collection-link__link" href="{{link.url}}">{{link | name_or_url}}</a></li>
 	{% endfor %}
 </ul>
 
