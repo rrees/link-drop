@@ -50,12 +50,14 @@
 	const ldLatestCollections = __webpack_require__(2);
 	const ldQuickControls = __webpack_require__(3);
 	const ldQuickAdd = __webpack_require__(4);
+	const ldAddCollection = __webpack_require__(5);
 
 	linkDropApp
 		.component('ldQuickControls', ldQuickControls)
 		.component('ldLatestCollections', ldLatestCollections)
 		.component('ldCollectionControls', ldCollectionControls)
-		.component('ldQuickAdd', ldQuickAdd);
+		.component('ldQuickAdd', ldQuickAdd)
+		.component('ldAddCollection', ldAddCollection);
 
 /***/ },
 /* 1 */
@@ -241,8 +243,6 @@
 
 		const collectionLinksResource = `/collection/${ctrl.collectionKey}/links`;
 
-		$log.debug(collectionLinksResource);
-
 		const domParser = new DOMParser();
 
 		function reloadLinks() {
@@ -250,7 +250,7 @@
 				.then((response) => {
 					const parsedHtml = domParser.parseFromString(response.data, 'text/html');
 					const linksElement = parsedHtml.querySelector('#links-list');
-					$log.debug(linksElement);
+
 					angular.element('#links-list').replaceWith(linksElement);
 				}, (response) => {
 					$log.error('Failed to re-read page');
@@ -278,6 +278,44 @@
 	}
 
 	module.exports = ldQuickAdd;
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	
+	function AddCollectionController($log, $http, $location) {
+		var ctrl = this;
+
+		const newCollectionUrl = '/api/collections/new';
+
+		ctrl.name = undefined;
+
+		function resetCollectionForm(ctrl) {
+			ctrl.name = undefined;
+		}
+
+		ctrl.addCollection = function() {
+
+			$http.put(newCollectionUrl, {name: ctrl.name})
+				.then((response) => {
+					resetCollectionForm(ctrl);
+					setTimeout(() => document.location.reload(true), 250);
+				}, (response) => $log.error('Collection creation failed', response));
+
+		}
+
+	}
+
+	const ldAddCollection = {
+		controller: AddCollectionController,
+		templateUrl: '/static/components/controls/add-collection.html',
+		bindings: {
+			collectionKey: '@'
+		}
+	}
+
+	module.exports = ldAddCollection;
 
 /***/ }
 /******/ ]);

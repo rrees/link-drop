@@ -4,6 +4,9 @@
 
 {% block body %}
 <div ng-app="linkDropApp">
+	<div class="add-collection-control">
+		<ld-add-collection></ld-add-collection>
+	</div>
 	{% if collections %}
 	<ul>
 		{% for collection in collections %}
