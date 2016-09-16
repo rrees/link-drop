@@ -311,7 +311,6 @@
 		controller: AddCollectionController,
 		templateUrl: '/static/components/controls/add-collection.html',
 		bindings: {
-			collectionKey: '@'
 		}
 	}
 
