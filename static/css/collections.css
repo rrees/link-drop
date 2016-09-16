@@ -1,0 +1,17 @@
+.collection-controls {
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 2rem;
+}
+
+.collection-controls > * {
+	margin-right: 2rem;
+}
+
+.collection-controls--controls-display {
+	display: flex;
+}
+
+.collection-controls--controls-display > * {
+	margin-right: 2rem;
+}

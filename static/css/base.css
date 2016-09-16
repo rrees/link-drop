@@ -1,14 +1,8 @@
 @import "links.css";
-
+@import "collections.css";
 body {
 	padding: 0 2vw;
 }
 
-.collection-controls {
-	display: flex;
-}
 
-.collection-controls > * {
-	margin-right: 2rem;
-}
 

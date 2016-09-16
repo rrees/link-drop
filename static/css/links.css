@@ -14,7 +14,7 @@
 
 .links-list--link-details--link {
 	flex-grow: 2;
-	max-width: 50vw;
+	width: 50vw;
 	padding-right: 2rem;
 	overflow-wrap: break-word;
 }
