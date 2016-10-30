@@ -15,7 +15,14 @@
 
 <ul class="collection-links">
 	{% for link in collection.links %}
-	<li class="collection-link"><a class="collection-link__link" href="{{link.url}}">{{link | name_or_url}}</a></li>
+	<li class="collection-link">
+		<p><a class="collection-link__link" href="{{link.url}}">{{link | name_or_url}}</a></p>
+		{% if link.description %}
+		<div>
+		{{link.description}}
+		</div>
+		{% endif %}
+	</li>
 	{% endfor %}
 </ul>
 
