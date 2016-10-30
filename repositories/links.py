@@ -19,6 +19,9 @@ def update(user, collection_id, link_index, form_data):
 		logging.info(form_data)
 		link.name = form_data['name']
 
+	if 'description' in form_data and form_data['description']:
+		link.description = form_data['description']
+
 	collection.put()
 
 	return collection

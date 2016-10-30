@@ -17,6 +17,11 @@
 	</div>
 
 	<div class="form-group">
+		<label for="name">Description</label>
+		<input id="description" class="form-control" name="description" type="text" {% if link.description %}value="{{link.description}}"{% endif %}>
+	</div>
+
+	<div class="form-group">
 		<button type="submit" class="btn">Save changes</button>
 	</div>
 </form>
