@@ -1,24 +1,7 @@
 .links-list {
-	max-width: 75vw;
-}
-
-.links-list--link-details {
-	display: flex;
-	padding-top: 0.5rem;
-	padding-bottom: 0.5rem;
+	width: 100%;
 }
 
 .links-list--link-details:hover {
 	background-color: #eee;
-}
-
-.links-list--link-details--link {
-	flex-grow: 2;
-	width: 50vw;
-	padding-right: 2rem;
-	overflow-wrap: break-word;
-}
-
-.links-list--link-details--edit {
-	flex-grow: 1;
 }

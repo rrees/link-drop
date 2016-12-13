@@ -18,11 +18,14 @@
 <section class="collection-display row">
 <h2>Links</h2>
 
-<ul id="links-list" class="links-list">
+<table id="links-list" class="links-list">
 	{% for link in collection.links %}
-	<li class="links-list--link-details"><a href="{{link.url}}" class="links-list--link-details--link">{{link | name_or_url }}</a> <a href="/collection/{{collection.key.urlsafe()}}/link/{{loop.index0}}" class="links-list--link-details--edit">Edit</a></li>
+	<tr class="links-list--link-details">
+		<td><a href="{{link.url}}" class="links-list--link-details--link">{{link | name_or_url }}</a></td>
+		<td>{% if link.description %}{{link.description}}{% endif %}</td>
+		<td><a href="/collection/{{collection.key.urlsafe()}}/link/{{loop.index0}}" class="links-list--link-details--edit">Edit</a></td>
 	{% endfor %}
-</ul>
+</table>
 
 </section>
 
