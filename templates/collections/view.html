@@ -21,9 +21,9 @@
 <table id="links-list" class="links-list">
 	{% for link in collection.links %}
 	<tr class="links-list--link-details">
-		<td><a href="{{link.url}}" class="links-list--link-details--link">{{link | name_or_url }}</a></td>
-		<td>{% if link.description %}{{link.description}}{% endif %}</td>
-		<td><a href="/collection/{{collection.key.urlsafe()}}/link/{{loop.index0}}" class="links-list--link-details--edit">Edit</a></td>
+		<td class="links-list--link-name"><a href="{{link.url}}" class="links-list--link-details--link">{{link | name_or_url }}</a></td>
+		<td class="links-list--link-description">{% if link.description %}{{link.description}}{% endif %}</td>
+		<td class="links-list--link-link"><a href="/collection/{{collection.key.urlsafe()}}/link/{{loop.index0}}" class="links-list--link-details--edit">Edit</a></td>
 	{% endfor %}
 </table>
 

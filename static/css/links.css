@@ -1,7 +1,13 @@
 .links-list {
 	width: 100%;
+	max-width: 75vw;
 }
 
 .links-list--link-details:hover {
 	background-color: #eee;
+}
+
+.links-list--link-description {
+	padding-left: 1rem;
+	padding-right: 1rem;
 }
