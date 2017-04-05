@@ -21,6 +21,7 @@ routes = [
 	('/collection/{collection_id}/link/{link_index}/form/edit', handlers.pages.links.EditForm()),
 	('/links/{public_id}', handlers.pages.collections.PublicView()),
 	('/collections', handlers.pages.collections.All()),
+	('/settings', handlers.pages.settings.Page()),
 ]
 
 for path, handler in routes:
