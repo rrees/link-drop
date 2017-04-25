@@ -49,4 +49,4 @@ class EditForm:
 
 		repositories.links.update(current_user, collection_id, link_idx, form_data)
 
-		raise falcon.HTTPFound('/collection/{0}/link/{1}'.format(collection_id, link_index))
+		raise falcon.HTTPFound('/collection/{0}/view'.format(collection_id))
