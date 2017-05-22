@@ -7,6 +7,8 @@ def name_or_url(link):
 	return link.url
 
 def md5(link):
+	if not link:
+		return ''
 	return hashlib.md5(link).hexdigest()
 
 all_filters = {
