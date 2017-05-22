@@ -48,6 +48,10 @@ def read(user, collection_id):
 
 def add_link(user, collection_id, url):
 	collection = read(user, collection_id)
+
+	if not link:
+		return collection
+
 	link = models.Link(url=url)
 	collection.links.append(link)
 	collection.put()
