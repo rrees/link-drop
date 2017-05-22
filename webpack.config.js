@@ -1,7 +1,7 @@
 module.exports = {
 	entry: "./src/js/app.js",
 	output: {
-		path: "./static/js",
+		path: __dirname + "/static/js",
 		filename: "app.js"
 	}
 };

@@ -18,6 +18,10 @@ function QuickAddController($http, $log, $rootScope) {
 	}
 
 	ctrl.addLink = function(url) {
+		if(!url) {
+			return;
+		}
+		
 		$http.put(collectionLinksResource, {link: url})
 			.then((response) => {
 				$log.debug('Link saved successfully');
