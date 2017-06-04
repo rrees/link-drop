@@ -82,3 +82,12 @@ def delete(user, collection_id):
 		collection.key.delete()
 
 	return collection
+
+def copy(user, collection_id, new_name):
+	collection = read(user, collection_id)
+
+	collection_copy = collection.create(user, new_name)
+
+	collection_copy.links = [l for l in collection.links]
+
+	return collection_copy
